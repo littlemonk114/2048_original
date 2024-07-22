@@ -1,34 +1,44 @@
+*{                                        /* universal */
+    box-sizing: border-box;               /* padding, border are included in width, height */
+}
+
 body {
     font-family: Arial;
     text-align: center;
+    font-size: 100%;
 }
 
 hr {
-    width: 500px;
+    width: 80%;
 }
 
 #board {
-    width: 400px;
-    height: 400px;
+    width: 70%;                            /* normally it is 70% of the screen */
+    max-width: 500px;                      /* but it won't be very very big */
+    aspect-ratio: 1;                       /* height = width */
     background-color: #cdc1b5;
     border: 6px solid #bbada0;
-    position: relative;
-    margin: 0 auto;
+    margin: 0 auto;                        /* top,buttom = 0 , left,right = auto = center */
     display: flex;
     flex-wrap: wrap;
+    position: relative;                    /* set this to relative so that the "gameover" can be absolute to this container */
 }
 
 #gameover {
-    font-size: 50px;
+    font-size: 2.5em;                        /* 1em = 16px , 3em = 48px */
     font-weight: bold;
+    z-index: 1;                            /* so that it goes on top of the board */
+    position: absolute;                    /* Set to absolute so it can overlap */
+    left: 50%;                              /* center it by setting left and top */
+    top: 50%;
+    transform: translate(-50%, -50%);       /* slightly adjust it according to the size of the word */
 }
 
 .tile {
     width: 25%;
     height: 25%;
     border: 5px solid #bbada0;
-    box-sizing: border-box;
-    font-size: 40px;
+    font-size: 3em;
     font-weight: bold;
     display: flex;  
     justify-content: center;
