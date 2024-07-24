@@ -77,7 +77,6 @@ function haveMove() {
 }
 
 function slide(row) {
-    moved = false;
     let originalrow = row;
     row = row.filter(num => num != 0);         /* this is a function, num is the parameter, return (num!=0) */
     for (let i = 0; i < row.length - 1; i++) {
@@ -100,6 +99,7 @@ function slide(row) {
 }
 
 function slideLeft() {
+    moved = false;
     for (let r = 0; r < N; r++) {
         let row = board[r];
         row = slide(row);
@@ -109,10 +109,14 @@ function slideLeft() {
             let num = board[r][c];
             updateTile(tile, num);
         }
+    }
+    if (moved == true) {
+        setTwo();
     }
 }
 
 function slideRight() {
+    moved = false;
     for (let r = 0; r < N; r++) {
         let row = board[r];
         row.reverse();
@@ -125,9 +129,13 @@ function slideRight() {
             updateTile(tile, num);
         }
     }
+    if (moved == true) {
+        setTwo();
+    }
 }
 
 function slideUp() {
+    moved = false;
     for (let c = 0; c < N; c++) {
         let row = [board[0][c], board[1][c], board[2][c], board[3][c]];
         row = slide(row);
@@ -138,9 +146,13 @@ function slideUp() {
             updateTile(tile, num);
         }
     }
+    if (moved == true) {
+        setTwo();
+    }
 }
 
 function slideDown() {
+    moved = false;
     for (let c = 0; c < N; c++) {
         let row = [board[0][c], board[1][c], board[2][c], board[3][c]];
         row.reverse();
@@ -152,6 +164,9 @@ function slideDown() {
             let num = board[r][c];
             updateTile(tile, num);
         }
+    }
+    if (moved == true) {
+        setTwo();
     }
 }
 
@@ -167,27 +182,15 @@ document.addEventListener("keyup", (e) => {
     }
     if (e.code == "ArrowLeft") {
         slideLeft();
-        if (moved == true) {
-            setTwo();
-        }
     }
     else if (e.code == "ArrowRight") {
         slideRight();
-        if (moved == true) {
-            setTwo();
-        }
     }
     else if (e.code == "ArrowUp") {
         slideUp();
-        if (moved == true) {
-            setTwo();
-        }
     }
     else if (e.code == "ArrowDown") {
         slideDown();
-        if (moved == true) {
-            setTwo();
-        }
     }
     document.getElementById("score").innerText = score;
     if (!haveMove()) {
