@@ -197,3 +197,40 @@ document.addEventListener("keyup", (e) => {
         gameover();
     }
 })
+
+document.addEventListener("touchstart", handleTouchStart);        
+document.addEventListener("touchend", handleTouchEnd);
+
+let xStart;                                                        
+let yStart;                                                   
+                                                                         
+function handleTouchStart(e) {
+    xStart = e.touches[0].clientX;                                     
+    yStart = e.touches[0].clientY;                           
+};                                                
+                                                                         
+function handleTouchEnd(e) {
+    let xEnd = e.changedTouches[0].clientX;                                    
+    let yEnd = e.changedTouches[0].clientY;
+    let xChange = xEnd - xStart;
+    let yChange = yEnd - yStart;
+                                                             
+    if (Math.abs(xChange) > Math.abs(yChange)) {
+        if (xChange < 0 ) {
+            slideLeft();
+        } else {
+            slideRight();
+        }                       
+    } 
+    else {
+        if (yChange > 0) {
+            slideDown();
+        } else { 
+            slideUp();
+        }                                                                 
+    }
+    document.getElementById("score").innerText = score;
+    if (!haveMove()) {
+        gameover();
+    }                                           
+};

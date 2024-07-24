@@ -1,11 +1,12 @@
 *{                                        /* universal */
     box-sizing: border-box;               /* padding, border are included in width, height */
+    overscroll-behavior: none;
 }
 
 body {
     font-family: Arial;
     text-align: center;
-    font-size: 100%;
+    font-size: 1rem;
 }
 
 hr {
@@ -17,7 +18,7 @@ hr {
     max-width: 500px;                      /* but it won't be very very big */
     aspect-ratio: 1;                       /* height = width */
     background-color: #cdc1b5;
-    border: 6px solid #bbada0;
+    border: 5px solid #bbada0;
     margin: 0 auto;                        /* top,buttom = 0 , left,right = auto = center */
     display: flex;
     flex-wrap: wrap;
