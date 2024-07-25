@@ -17,7 +17,7 @@ hr {
     max-width: 70vh;                       /* 70% of the viewport height */
     aspect-ratio: 1;                       /* height = width */
     background-color: #cdc1b5;
-    border: 5px solid #bbada0;
+    border: 0.3em solid #bbada0;
     margin: 0 auto;                        /* top,buttom = 0 , left,right = auto = center */
     display: flex;
     flex-wrap: wrap;
@@ -38,10 +38,7 @@ hr {
 }
 
 .tile {
-    width: 25%;
-    height: 25%;
-    border: 5px solid #bbada0;
-    font-size: 10cqw;
+    border: 0.15em solid #bbada0;
     font-weight: bold;
     display: flex;  
     justify-content: center;

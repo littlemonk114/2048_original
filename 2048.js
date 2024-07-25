@@ -2,7 +2,17 @@ let board = [];
 let score = 0;
 let end = false;
 let moved = false;
-const N = 4;
+const N = 10;
+
+function win() {
+    end = true;
+    document.getElementById("gameover").innerText = "You got 8192!";
+    for (let r = 0; r < N; r++) {
+        for (let c = 0; c < N; c++) {
+            document.getElementById(r.toString() + "-" + c.toString()).style.opacity = 0.3;
+        }
+    }
+}
 
 function updateTile(tile, num) {
     tile.innerText = "";
@@ -11,6 +21,9 @@ function updateTile(tile, num) {
     if (num > 0) {
         tile.innerText = num;
         tile.classList.add("x" + num.toString());
+        if (num == 8192) {
+            win();
+        }
     }
 }
 
@@ -34,6 +47,9 @@ window.onload = function() {
         for (let c = 0; c < N; c++) {
             let tile = document.createElement("div");
             tile.id = r.toString() + "-" + c.toString();
+            tile.style.width = (100.0/N).toString()+"%";
+            tile.style.height = (100.0/N).toString()+"%";
+            tile.style.fontSize = (40.0/N).toString()+"cqw";
             updateTile(tile, 0);
             document.getElementById("board").append(tile);
             row.push(0);
@@ -137,7 +153,10 @@ function slideRight() {
 function slideUp() {
     moved = false;
     for (let c = 0; c < N; c++) {
-        let row = [board[0][c], board[1][c], board[2][c], board[3][c]];
+        let row = [];
+        for (let r = 0; r < N; r++) {
+            row.push(board[r][c]);
+        }
         row = slide(row);
         for (let r = 0; r < N; r++) {
             board[r][c] = row[r];
@@ -154,7 +173,10 @@ function slideUp() {
 function slideDown() {
     moved = false;
     for (let c = 0; c < N; c++) {
-        let row = [board[0][c], board[1][c], board[2][c], board[3][c]];
+        let row = [];
+        for (let r = 0; r < N; r++) {
+            row.push(board[r][c]);
+        }
         row.reverse();
         row = slide(row);
         row.reverse();
@@ -173,7 +195,11 @@ function slideDown() {
 function gameover() {
     end = true;
     document.getElementById("gameover").innerText = "Game Over";
-    document.getElementById("board").style.opacity = 0.3;
+    for (let r = 0; r < N; r++) {
+        for (let c = 0; c < N; c++) {
+            document.getElementById(r.toString() + "-" + c.toString()).style.opacity = 0.3;
+        }
+    }
 }
 
 document.addEventListener("keyup", (e) => {
@@ -214,7 +240,7 @@ function handleTouchEnd(e) {
     let yEnd = e.changedTouches[0].clientY;
     let xChange = xEnd - xStart;
     let yChange = yEnd - yStart;
-                                                             
+    if (Math.abs(xChange) < 10 && Math.abs(yChange) < 10) return;                      
     if (Math.abs(xChange) > Math.abs(yChange)) {
         if (xChange < 0 ) {
             slideLeft();
