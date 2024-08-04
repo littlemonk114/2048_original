@@ -2,7 +2,7 @@ let board = [];
 let score = 0;
 let end = false;
 let moved = false;
-const N = 10;
+let N = 4;
 
 function win() {
     end = true;
@@ -41,7 +41,11 @@ function setTwo() {
     }
 }
 
-window.onload = function() {
+function startGame() {
+    N = document.getElementById("n").value;
+    document.getElementById("n").style.display = "none";
+    document.getElementById("startBtn").style.display = "none";
+    document.getElementById("scoreShow").style.display = "block";
     for (let r = 0; r < N; r++) {
         let row = [];
         for (let c = 0; c < N; c++) {

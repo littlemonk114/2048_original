@@ -11,7 +11,17 @@
     <body>
         <h1>2048</h1>
         <hr> 
-        <h2>Score: <span id="score">0</span></h2>
+        <h2 id="scoreShow">Score: <span id="score">0</span></h2>
+        <select name="n" id="n">
+            <option value="2">2 x 2</option>
+            <option value="3">3 x 3</option>
+            <option selected value="4">4 x 4</option>
+            <option value="5">5 x 5</option>
+            <option value="6">6 x 6</option>
+            <option value="7">7 x 7</option>
+            <option value="8">8 x 8</option>
+        </select>
+        <button id="startBtn" onclick="startGame()">Start</button>
         <div id="board">
             <p id="gameover"></p>
         </div>
